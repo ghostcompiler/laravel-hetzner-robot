@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2026-06-14
+
+### Added
+- Mapping support for Hetzner Server Market / Auction endpoints inside the `OrderProduct` DTO (including 19 new fields such as `cpu`, `cpuBenchmark`, `memorySize`, `hddSize`, `price`, `priceHourly`, `nextReduce`, and `nextReduceDate`).
+- Documentation references for server market / auction functions in interactive docs.
+
 ## [1.0.0] - 2026-06-14
 
 ### Added

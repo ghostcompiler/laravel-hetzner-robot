@@ -327,7 +327,8 @@ HetznerRobot::sshKeys()->delete('12:34:56:78:90:ab:cd:ef:12:34:56:78:90:ab:cd:ef
       <section id="ordering" data-title="Ordering">
         <h2>Ordering</h2>
         <p>Retrieve order products and provision bare-metal servers, market servers, or addons.</p>
-        <pre><code>// Get products catalog
+        <pre><code>// --- Standard Servers ---
+// Get products catalog
 $products = HetznerRobot::orders()->getServerProducts();
 
 // Get order transactions
@@ -337,7 +338,25 @@ $transactions = HetznerRobot::orders()->getServerTransactions();
 $order = HetznerRobot::orders()->orderServer([
     'product_id' => 'EX44',
     'authorized_key' => '12:34:56:78...'
-]);</code></pre>
+]);
+
+// --- Server Market / Auction ---
+// Get market/auction products catalog
+$marketProducts = HetznerRobot::orders()->getMarketProducts();
+
+// Get specific market server details
+$marketProduct = HetznerRobot::orders()->getMarketProduct('3016304');
+
+// Order a market auction server
+$marketOrder = HetznerRobot::orders()->orderMarket([
+    'product_id' => 3016304,
+    'authorized_key' => ['12:34:56:78...'],
+    'dist' => 'Rescue system',
+    'lang' => 'en'
+]);
+
+// Get market order transactions
+$marketTransactions = HetznerRobot::orders()->getMarketTransactions();</code></pre>
       </section>
 
       <section id="storage-boxes" data-title="Storage Boxes">
