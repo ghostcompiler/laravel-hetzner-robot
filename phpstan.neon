@@ -1,0 +1,10 @@
+parameters:
+    level: 5
+    paths:
+        - src
+    excludePaths:
+        - tests
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        - '#Unsafe usage of new static\(\)#'
+        - '#PHPDoc tag @var for variable \$promise contains unresolvable type#'

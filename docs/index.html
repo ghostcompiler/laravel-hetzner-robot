@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laravel Hetzner Robot SDK v1.0.0 Documentation</title>
+  <meta name="description" content="Complete documentation for the laravel-hetzner-robot SDK package. Manage bare-metal servers, IPs, subnets, storage boxes, firewalls, and vswitches.">
+  <meta name="author" content="Ghost Compiler">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#22c55e">
+  <meta name="application-name" content="Hetzner Robot SDK Documentation">
+  <link rel="canonical" href="https://ghostcompiler.github.io/laravel-hetzner-robot/">
+  <link rel="icon" href="https://res.cloudinary.com/djgvfl1tv/image/upload/v1780666791/logo_mqnqn4.png">
+  
+  <!-- Google Fonts Connection -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Laravel Hetzner Robot SDK v1.0.0 Documentation",
+    "about": "Laravel SDK for Hetzner Robot Webservice API",
+    "author": {
+      "@type": "Organization",
+      "name": "Ghost Compiler"
+    },
+    "version": "1.0.0",
+    "url": "https://ghostcompiler.github.io/laravel-hetzner-robot/"
+  }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body class="docs-page">
+  <header class="site-header docs-header">
+    <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle navigation">
+      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+    <a class="brand" href="#overview">
+      <img src="https://res.cloudinary.com/djgvfl1tv/image/upload/v1780666791/logo_mqnqn4.png" alt="Ghost Compiler logo">
+      <span>Hetzner Robot</span>
+    </a>
+    <span class="version-pill">v1.0.0</span>
+    <div class="doc-search">
+      <input id="docSearch" type="search" placeholder="Search documentation">
+    </div>
+    <nav class="top-links">
+      <a href="#overview">Overview</a>
+      <a href="#installation">Install</a>
+      <a href="#servers">Servers</a>
+      <a href="#helper-cheatsheet">Cheatsheet</a>
+      
+      <!-- Segmented Theme Switcher Control -->
+      <div class="theme-segmented-control" role="radiogroup" aria-label="Theme switcher">
+        <button class="theme-control-btn" data-theme-val="light" aria-label="Light Mode" title="Light Mode">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <button class="theme-control-btn" data-theme-val="dark" aria-label="Dark Mode" title="Dark Mode">
+          <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <button class="theme-control-btn" data-theme-val="system" aria-label="System Mode" title="System Mode">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Overlay for mobile navigation drawer -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" id="docsSidebar" aria-label="Documentation navigation">
+      <div class="sidebar-header-mobile">
+        <span>Navigation</span>
+        <button id="closeSidebarBtn" class="close-sidebar-btn" aria-label="Close navigation">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="sidebar-group">
+        <p>Start</p>
+        <a href="#overview">Overview</a>
+        <a href="#installation">Installation</a>
+        <a href="#credentials">API Credentials</a>
+        <a href="#configuration">Configuration</a>
+        <a href="#service-provider">Service Provider</a>
+        <a href="#facades">Facades</a>
+      </div>
+      <div class="sidebar-group">
+        <p>Resources</p>
+        <a href="#servers">Servers</a>
+        <a href="#ips">IP Addresses</a>
+        <a href="#subnets">Subnets</a>
+        <a href="#resets">Resets</a>
+        <a href="#failovers">Failover IPs</a>
+        <a href="#wol">Wake On LAN</a>
+        <a href="#boots">Boot Configurations</a>
+        <a href="#rdns">Reverse DNS</a>
+        <a href="#traffic">Traffic Queries</a>
+        <a href="#ssh-keys">SSH Keys</a>
+        <a href="#ordering">Ordering</a>
+        <a href="#storage-boxes">Storage Boxes</a>
+        <a href="#firewalls">Firewalls</a>
+        <a href="#vswitches">vSwitches</a>
+      </div>
+      <div class="sidebar-group">
+        <p>Advanced</p>
+        <a href="#async-requests">Async Requests</a>
+        <a href="#batch-operations">Batch Operations</a>
+        <a href="#retries-limits">Retries & Limits</a>
+        <a href="#exceptions">Exceptions</a>
+      </div>
+      <div class="sidebar-group">
+        <p>Reference</p>
+        <a href="#helper-cheatsheet">Helper Cheatsheet</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </aside>
+
+    <main class="doc-article">
+      
+      <section id="overview" data-title="Overview">
+        <p class="eyebrow">Documentation v1.0.0</p>
+        <h1>Overview</h1>
+        <p class="lead">The Laravel Hetzner Robot SDK provides a production-ready client interface for managing bare-metal servers, subnets, failover IPs, Wake on LAN systems, storage boxes, firewalls, and vSwitches. Compatible with PHP 8.2 through 8.5, and Laravel 11 through 13.</p>
+        <div class="callout">
+          <strong>Fully Type-Safe DTOs.</strong>
+          Every response matches structured class mappings with static `fromArray()` hydrators, allowing autocomplete and IDE indexing.
+        </div>
+      </section>
+
+      <section id="installation" data-title="Installation">
+        <h2>Installation</h2>
+        <p>Install the package through Composer:</p>
+        <pre><code>composer require ghostcompiler/laravel-hetzner-robot</code></pre>
+        <p>Publish the configuration assets:</p>
+        <pre><code>php artisan vendor:publish --provider="Vendor\HetznerRobot\Providers\HetznerRobotServiceProvider" --tag="config"</code></pre>
+      </section>
+
+      <section id="credentials" data-title="API Credentials">
+        <h2>API Credentials</h2>
+        <p>To use the Hetzner Robot API, you must generate a dedicated Web Service/App user. This separates your main account credentials from API access.</p>
+        <div class="callout" style="border-left-color: var(--accent);">
+          <strong>Direct Link:</strong>
+          Generate and manage your Web Service credentials directly inside the Hetzner Robot Console here:
+          <br>
+          <a href="https://robot.hetzner.com/preferences/index" target="_blank" rel="noopener" style="font-weight: 600; text-decoration: underline; color: var(--accent);">
+            Hetzner Robot Web Service Credentials page ↗
+          </a>
+        </div>
+      </section>
+
+      <section id="configuration" data-title="Configuration">
+        <h2>Configuration</h2>
+        <p>The published configuration file lives at <code>config/hetzner-robot.php</code>. You can configure your Robot Web Service credentials in your <code>.env</code> file.</p>
+        <pre><code>return [
+    'username' => env('HETZNER_ROBOT_USERNAME'),
+    'password' => env('HETZNER_ROBOT_PASSWORD'),
+    'base_url' => env('HETZNER_ROBOT_BASE_URL', 'https://robot-ws.your-server.de'),
+    'timeout' => (int) env('HETZNER_ROBOT_TIMEOUT', 30),
+    'retries' => (int) env('HETZNER_ROBOT_RETRIES', 3),
+    'retry_backoff' => (int) env('HETZNER_ROBOT_RETRY_BACKOFF', 100),
+    'logging' => [
+        'enabled' => (bool) env('HETZNER_ROBOT_LOGGING_ENABLED', false),
+        'channel' => env('HETZNER_ROBOT_LOGGING_CHANNEL'),
+    ],
+];</code></pre>
+      </section>
+
+      <section id="service-provider" data-title="Service Provider">
+        <h2>Service Provider</h2>
+        <p>The service provider binds the singleton client and orchestrator to Laravel's service container.</p>
+        <pre><code>use Vendor\HetznerRobot\Managers\HetznerManager;
+
+$manager = app(HetznerManager::class);
+$servers = $manager->servers()->all();</code></pre>
+      </section>
+
+      <section id="facades" data-title="Facades">
+        <h2>Facades</h2>
+        <p>Interact with the SDK fluently using the Facade accessor.</p>
+        <pre><code>use Vendor\HetznerRobot\Facades\HetznerRobot;
+
+$server = HetznerRobot::servers()->find(123456);</code></pre>
+      </section>
+
+      <section id="servers" data-title="Servers">
+        <h2>Servers</h2>
+        <p>Manage bare-metal servers, update their names, and request cancellations.</p>
+        <pre><code>// List all servers
+$servers = HetznerRobot::servers()->all();
+
+// Find a single server
+$server = HetznerRobot::servers()->find(123456);
+
+// Rename a server
+$updatedServer = HetznerRobot::servers()->update(123456, [
+    'server_name' => 'production-web-01'
+]);</code></pre>
+      </section>
+
+      <section id="ips" data-title="IP Addresses">
+        <h2>IP Addresses</h2>
+        <p>Manage individual IP addresses, reverse DNS, and MAC configurations.</p>
+        <pre><code>// List all IP addresses
+$ips = HetznerRobot::ips()->all();
+
+// Find a specific IP
+$ip = HetznerRobot::ips()->find('123.123.123.123');
+
+// Get MAC address configuration
+$mac = HetznerRobot::ips()->getMac('123.123.123.123');</code></pre>
+      </section>
+
+      <section id="subnets" data-title="Subnets">
+        <h2>Subnets</h2>
+        <p>Manage subnets, request MAC addresses, and handle cancellation policies.</p>
+        <pre><code>// List all subnets
+$subnets = HetznerRobot::subnets()->all();
+
+// Find a specific subnet
+$subnet = HetznerRobot::subnets()->find('2a01:4f8:123:456::/64');</code></pre>
+      </section>
+
+      <section id="resets" data-title="Resets">
+        <h2>Resets</h2>
+        <p>View reset options and trigger hardware power cycles, manual restarts, or ACPI shutdowns.</p>
+        <pre><code>// List resets for all servers
+$resets = HetznerRobot::resets()->all();
+
+// Trigger a hardware reset
+$result = HetznerRobot::resets()->create(123456, [
+    'type' => 'hw' // Options: hw, sw, man, power, acpi
+]);</code></pre>
+      </section>
+
+      <section id="failovers" data-title="Failover IPs">
+        <h2>Failover IPs</h2>
+        <p>Route highly available failover IP addresses dynamically to other target servers.</p>
+        <pre><code>// List all failovers
+$failovers = HetznerRobot::failovers()->all();
+
+// Route failover IP to a new server IP
+$failover = HetznerRobot::failovers()->update('138.201.12.34', '138.201.56.78');</code></pre>
+      </section>
+
+      <section id="wol" data-title="Wake On LAN">
+        <h2>Wake On LAN</h2>
+        <p>Retrieve Wake on LAN configurations and send WoL magic packets to servers.</p>
+        <pre><code>// Check Wake on LAN availability for a server
+$wol = HetznerRobot::wols()->find(123456);
+
+// Send WoL packet
+$result = HetznerRobot::wols()->send(123456);</code></pre>
+      </section>
+
+      <section id="boots" data-title="Boot Configurations">
+        <h2>Boot Configurations</h2>
+        <p>Configure rescue environments, install custom OS setups (Linux, Windows), or enable VNC consoles.</p>
+        <pre><code>// Get boot settings
+$boot = HetznerRobot::boots()->find(123456);
+
+// Enable rescue system
+$rescue = HetznerRobot::boots()->enableRescue(123456, [
+    'os' => 'linux',
+    'arch' => 64
+]);
+
+// Enable VNC installer
+$vnc = HetznerRobot::boots()->enableVnc(123456, [
+    'dist' => 'CentOS 9',
+    'arch' => 64
+]);</code></pre>
+      </section>
+
+      <section id="rdns" data-title="Reverse DNS">
+        <h2>Reverse DNS</h2>
+        <p>Manage reverse DNS (PTR) records for IP addresses and subnets.</p>
+        <pre><code>// List PTR records
+$rdns = HetznerRobot::rdns()->all();
+
+// Find PTR for IP
+$ptr = HetznerRobot::rdns()->find('123.123.123.123');
+
+// Set/Update PTR record
+$newPtr = HetznerRobot::rdns()->update('123.123.123.123', 'static.example.com');</code></pre>
+      </section>
+
+      <section id="traffic" data-title="Traffic Queries">
+        <h2>Traffic Queries</h2>
+        <p>Monitor bandwidth and traffic consumption details across servers, subnets, and failover IPs.</p>
+        <pre><code>// Query traffic statistics
+$traffic = HetznerRobot::traffic()->query([
+    'type' => 'day', // day, month, year
+    'from' => '2026-06-01',
+    'to' => '2026-06-14',
+    'ip' => ['123.123.123.123']
+]);</code></pre>
+      </section>
+
+      <section id="ssh-keys" data-title="SSH Keys">
+        <h2>SSH Keys</h2>
+        <p>Manage SSH keys stored in your Robot account for automated rescue logins.</p>
+        <pre><code>// List keys
+$keys = HetznerRobot::sshKeys()->all();
+
+// Create new SSH Key
+$key = HetznerRobot::sshKeys()->create([
+    'name' => 'admin-laptop',
+    'data' => 'ssh-rsa AAAAB3NzaC1yc2E...'
+]);
+
+// Delete key
+HetznerRobot::sshKeys()->delete('12:34:56:78:90:ab:cd:ef:12:34:56:78:90:ab:cd:ef');</code></pre>
+      </section>
+
+      <section id="ordering" data-title="Ordering">
+        <h2>Ordering</h2>
+        <p>Retrieve order products and provision bare-metal servers, market servers, or addons.</p>
+        <pre><code>// Get products catalog
+$products = HetznerRobot::orders()->getServerProducts();
+
+// Get order transactions
+$transactions = HetznerRobot::orders()->getServerTransactions();
+
+// Order a specific server product
+$order = HetznerRobot::orders()->orderServer([
+    'product_id' => 'EX44',
+    'authorized_key' => '12:34:56:78...'
+]);</code></pre>
+      </section>
+
+      <section id="storage-boxes" data-title="Storage Boxes">
+        <h2>Storage Boxes</h2>
+        <p>Manage Storage Boxes, update accounts, handle snapshots, snapshot plans, and sub-accounts.</p>
+        <pre><code>// List Storage Boxes
+$boxes = HetznerRobot::storageBoxes()->all();
+
+// Find a specific storage box
+$box = HetznerRobot::storageBoxes()->find(12345);
+
+// Create box snapshot
+$snapshot = HetznerRobot::storageBoxes()->createSnapshot(12345);</code></pre>
+      </section>
+
+      <section id="firewalls" data-title="Firewalls">
+        <h2>Firewalls</h2>
+        <p>Configure hardware firewalls for bare-metal servers or work with reusable templates.</p>
+        <pre><code>// Get server firewall config
+$firewall = HetznerRobot::firewalls()->find(123456);
+
+// Apply a template firewall rule set
+$result = HetznerRobot::firewalls()->create(123456, [
+    'status' => 'active',
+    'filter_ipv4' => 'active',
+    'rules' => [
+        'input' => [
+            ['ip_version' => 'ipv4', 'action' => 'accept', 'proto' => 'tcp', 'dst_port' => '80'],
+            ['ip_version' => 'ipv4', 'action' => 'accept', 'proto' => 'tcp', 'dst_port' => '443']
+        ]
+    ]
+]);</code></pre>
+      </section>
+
+      <section id="vswitches" data-title="vSwitches">
+        <h2>vSwitches</h2>
+        <p>Setup virtual local networks (vSwitches) and assign or remove bare-metal servers.</p>
+        <pre><code>// List vSwitches
+$vswitches = HetznerRobot::vswitches()->all();
+
+// Create a new vSwitch
+$switch = HetznerRobot::vswitches()->create([
+    'name' => 'backend-lan',
+    'vlan' => 4000
+]);
+
+// Add servers to vSwitch
+HetznerRobot::vswitches()->addServers($switchId, [123456, 123457]);</code></pre>
+      </section>
+
+      <section id="async-requests" data-title="Async Requests">
+        <h2>Async Requests</h2>
+        <p>Configure queries asynchronously to yield Guzzle Promises.</p>
+        <pre><code>$promise = HetznerRobot::servers()->async()->all();
+$servers = $promise->wait();</code></pre>
+      </section>
+
+      <section id="batch-operations" data-title="Batch Operations">
+        <h2>Batch Operations</h2>
+        <p>Run calls concurrently in pooled execution tasks.</p>
+        <pre><code>$results = HetznerRobot::batch([
+    fn () => HetznerRobot::servers()->find(123456),
+    fn () => HetznerRobot::servers()->find(123457),
+]);</code></pre>
+      </section>
+
+      <section id="retries-limits" data-title="Retries & Limits">
+        <h2>Retries & Rate Limits</h2>
+        <p>Request pipeline is governed by automatic Guzzle middleware.</p>
+        <div class="mermaid">graph TD
+  Request["Request Fired"] --> Client["HetznerClient Client"]
+  Client --> Send["Guzzle Send"]
+  Send --> RateLimit{"Status 429 or 403 RATE_LIMIT_EXCEEDED?"}
+  RateLimit -- Yes --> Parse["Read interval or RateLimit-Reset Header"]
+  Parse --> Sleep["Wait/Sleep"]
+  Sleep --> Send
+  RateLimit -- No --> Success["Response Decoded"]</div>
+      </section>
+
+      <section id="exceptions" data-title="Exception Handling">
+        <h2>Exception Handling</h2>
+        <p>HTTP error codes automatically map to specific PHP exception classes.</p>
+        <pre><code>try {
+    HetznerRobot::servers()->find(999999);
+} catch (\Vendor\HetznerRobot\Exceptions\NotFoundException $e) {
+    // 404 Error
+}</code></pre>
+      </section>
+
+      <section id="helper-cheatsheet" data-title="Helper Cheatsheet">
+        <h2>Helper Cheatsheet</h2>
+        <p>Quick copy reference table for common helper methods.</p>
+        <div class="command-list">
+          <code>HetznerRobot::ping();</code>
+          <code>HetznerRobot::version();</code>
+          <code>HetznerRobot::rateLimit();</code>
+          <code>HetznerRobot::health();</code>
+          <code>HetznerRobot::config();</code>
+          <code>HetznerRobot::client();</code>
+        </div>
+      </section>
+
+      <section id="faq" data-title="FAQ">
+        <h2>FAQ</h2>
+        <div class="faq">
+          <h3>Does the SDK support multiple accounts?</h3>
+          <p>Yes. Change credentials dynamically using <code>HetznerRobot::authenticate($username, $password)</code>.</p>
+          <h3>How is pagination handled?</h3>
+          <p>The Hetzner Robot API does not provide unified pagination cursors across all resources, but resources yielding lists are collected into custom `Collection` models for standard map, filter, and count operations.</p>
+        </div>
+      </section>
+    </main>
+
+    <aside class="on-this-page" aria-label="On this page">
+      <p>On this page</p>
+      <div id="toc"></div>
+    </aside>
+  </div>
+
+  <footer class="site-header" style="justify-content: center; font-size: .88rem; color: var(--muted); border-top: 1px solid var(--line); border-bottom: none; margin-top: 40px; min-height: 80px;">
+    <span>Laravel Hetzner Robot SDK by Ghost Compiler. hello@ghostcompiler.com</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

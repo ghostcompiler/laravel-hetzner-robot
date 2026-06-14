@@ -1,0 +1,52 @@
+{
+    "name": "ghostcompiler/laravel-hetzner-robot",
+    "version": "1.0.0",
+    "description": "Production-ready Laravel SDK for the Hetzner Robot API",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ghost Compiler",
+            "email": "info@ghostcompiler.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2 || ^8.3 || ^8.4 || ^8.5",
+        "illuminate/support": "^11.0 || ^12.0 || ^13.0",
+        "illuminate/contracts": "^11.0 || ^12.0 || ^13.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.13",
+        "orchestra/testbench": "^9.0 || ^10.0 || ^11.0",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "rector/rector": "^1.0",
+        "vimeo/psalm": "^5.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vendor\\HetznerRobot\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vendor\\HetznerRobot\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vendor\\HetznerRobot\\Providers\\HetznerRobotServiceProvider"
+            ],
+            "aliases": {
+                "HetznerRobot": "Vendor\\HetznerRobot\\Facades\\HetznerRobot"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
+    }
+}
