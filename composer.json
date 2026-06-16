@@ -1,6 +1,5 @@
 {
     "name": "ghostcompiler/laravel-hetzner-robot",
-    "version": "1.0.0",
     "description": "Production-ready Laravel SDK for the Hetzner Robot API",
     "license": "MIT",
     "authors": [
