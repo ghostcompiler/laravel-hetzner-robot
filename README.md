@@ -15,6 +15,11 @@
   <img src="https://img.shields.io/badge/Built%20By-Ghost%20Compiler-0F172A?style=for-the-badge" alt="Ghost Compiler">
 </p>
 
+<p align="center">
+    <img src="https://img.shields.io/github/stars/ghostcompiler/laravel-hetzner-robot?style=for-the-badge&logo=github" />
+    <img src="https://img.shields.io/packagist/dt/ghostcompiler/laravel-hetzner-robot?style=for-the-badge&logo=packagist" />
+</p>
+
 ---
 
 ## Features
